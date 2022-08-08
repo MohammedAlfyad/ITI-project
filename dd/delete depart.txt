@@ -1,0 +1,28 @@
+<?php
+$connection = new mysqli("localhost","root","","iti_system");
+
+//$connnection->query("show tables;");
+?>
+<html>
+<body>
+
+<form action="iti_system.php" method="post">
+    
+<h2>
+department id:
+<input type="number" name="Dept_id">
+<br><br>
+<button name="delete" value="delete">Delete department</button>
+</form>
+</body>
+</html>
+<?php
+
+if(isset($_POST['delete']))
+{	
+		$sql="delete from departments where Dept_id=".$_POST['Dept_id'];
+		$connection->query($sql);
+	
+	echo $connection->error;
+}
+?>

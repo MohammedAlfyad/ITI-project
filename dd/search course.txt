@@ -1,0 +1,32 @@
+<?php
+$connection = new mysqli("localhost","root","","iti_system.php");
+
+//$connnection->query("show tables;");
+?>
+<html>
+<body>
+course Name:
+<input type="text" name="crs_name">
+<br><br>
+</body>
+</html>
+<button name="search" value="search">Search course</button>
+<?php
+if(isset($_POST['search']))
+{	$sql="select * from courses where crs_name='".$_POST['crs_name']."'";
+	$res=$connection->query($sql);
+	if($res->num_rows > 0)
+	{
+		while($row=$res->fetch_assoc())
+		{
+			echo "course id:".$row['crs_id']."<br>";
+			echo "course name:".$row['crs_name']."<br>";
+            echo "course hours:".$row['crs_hours']."<br>";
+			echo "department id:".$row['depart_id']."<br>"; 
+		}
+	}
+	echo $connection->error;
+}
+
+
+?>
